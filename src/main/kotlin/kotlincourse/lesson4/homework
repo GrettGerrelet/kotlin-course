@@ -1,0 +1,41 @@
+
+Int = 42
+98765432123456789L
+23.45f
+Double = 0.123456789
+String = "Kotlin & Java"
+false
+'c'
+Int = 500
+4294967296L
+18.0f
+-0.001
+String = "OpenAI"
+“true”
+'9'
+Int = 2048
+10000000000L
+5.75f
+Double = 1.414
+String = "Artificial Intelligence"
+false
+'@'
+Int = 1024
+1234567890123L
+10.01f
+-273.15
+String = "SpaceX"
+true
+String = “🤯”
+‘65535’
+72057594037927935L
+2.71828f
+Double = 101.0101
+String = "Quantum Computing"
+false
+'x'
+Int = 314
+123456789123456789L
+6.626f
+Double = 0.007
+String = "Android Studio"
