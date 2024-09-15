@@ -11,7 +11,7 @@ lateinit var owner: String
 
 const val WHEELS: Int = 4       //константы всегда большими буквами или с нижним подчёркиванием
 
-val finally_report: String by lazy {
+val finally_report: String by lazy { "..."
 }
 
 var fuel: Double = 0.0
