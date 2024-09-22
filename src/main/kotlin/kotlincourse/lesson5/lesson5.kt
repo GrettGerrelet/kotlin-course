@@ -38,12 +38,11 @@ fun main() {
 
     var name: String? = "we"
 
-    val result = name ?: throw Exception("Не может быть  null")  //  Если нейм равен налл  то анкноу
+    val result = name ?: throw Exception("Не может быть  null")  //  Если name равен null то Unknown
 
-    fun printPrice(price: Double, s: Int?){
+    fun printPrice(price: Double, s: Int?) {
         val koef = (100 - (s ?: 0 ))/100.0
         println(price * koef)
-
     }
 
     fun printSiteLang(lang: String?){
