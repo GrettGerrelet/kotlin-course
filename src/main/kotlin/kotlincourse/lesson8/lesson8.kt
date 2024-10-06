@@ -108,5 +108,5 @@ fun main() {
     val number = "123-456-7890"
     val split = number.split("-")
     println("XXX-XXX-${split[2]}")
-
 }
+
