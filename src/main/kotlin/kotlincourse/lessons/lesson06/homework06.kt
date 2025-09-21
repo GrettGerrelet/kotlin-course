@@ -111,11 +111,11 @@ fun choosingClothes(temperature: Double) {
 // Напишите функцию, которая принимает возраст зрителя и возвращает доступные для него категории фильмов:
 // "детские" (от 0 до 9), "подростковые" (от 10 до 18), "18+" для остальных.
 fun choosingFilms(age: Int) {
-    if (age in 0..11) {
+    if (age in 0..9) {
         println("Для детей")
-    } else if (age in 12 .. 17) {
+    } else if (age in 10 .. 18) {
         println("Для подростков")
-    } else if (age >= 18) {
+    } else if (age >= 19) {
         println("18+")
     } else {
         println("Неверно указан возраст")
