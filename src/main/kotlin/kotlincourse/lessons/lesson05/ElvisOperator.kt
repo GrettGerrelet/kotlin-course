@@ -9,7 +9,7 @@ fun main() {
     // Если коэффициент затухания неизвестен, использовать стандартное значение 0.5.
 
     val baseIntensity: Double = 3.0
-    val coefficient: Double? = 0.73
+    val coefficient: Double? = null
     val baseCoefficient = 0.5
     val resultIntensity = baseIntensity * (coefficient ?: baseCoefficient)
     println(resultIntensity)
