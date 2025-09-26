@@ -6,7 +6,7 @@ fun main() {
     seasons(1)
     humanAge(2.0)
     transport(300)
-    bonuses(432.1)
+    bonuses(-432.1)
     typeDoc(".jpg")
     temperatureConversion(30.0, "C")
     choosingClothes(30.0)
