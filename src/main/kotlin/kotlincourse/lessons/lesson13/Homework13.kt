@@ -1,94 +1,197 @@
 package org.example.kotlincourse.lessons.lesson13
 
 fun main() {
+    println("=== Задачи по работе со словарями ===\n")
 
-    val testsList = mutableMapOf<String, Double> ("Test 1" to 1.1, "Test 2" to 2.2, "Test 3" to 3.3, "Test 4" to 4.4)
+    // 1. Определите среднее время выполнения теста
+    println("1. Среднее время выполнения теста")
+    val testTimes = mapOf("test1" to 5.2, "test2" to 3.1, "test3" to 7.8)
+    val averageTime = testTimes.values.average()
+    println("Среднее время: $averageTime сек\n")
 
-    println("1. Среднее время выполнения теста: ${testsList.values.average()}")
-    println("2. Список тестовых методов: ${testsList.keys}")
-    testsList["Test 4"] = 4.4
-    println("3. Добавлен новый тест и его результат: $testsList")
+    // 2. Выведите список всех тестовых методов
+    println("2. Список всех тестовых методов")
+    val testMetadata = mapOf("testLogin" to "metadata1", "testLogout" to "metadata2")
+    val testMethods = testMetadata.keys.toList()
+    println("Методы: $testMethods\n")
 
-    val testListResult = mapOf<String, String>(
-        "Test 1" to "Skipped",
-        "Test 2" to "Failed",
-        "Test 3" to "Passed",
-        "Test 4" to "Passed"
+    // 3. Добавьте новый тест и его результат
+    println("3. Добавление нового теста")
+    val testResults = mutableMapOf("test1" to "passed", "test2" to "failed")
+    testResults.put("test3", "passed")
+    println("Обновленные результаты: $testResults\n")
+
+    // 4. Посчитайте количество успешных тестов
+    println("4. Количество успешных тестов")
+    val results = mapOf("test1" to "passed", "test2" to "failed", "test3" to "passed", "test4" to "skipped")
+    val passedCount = results.count { it.value == "passed" }
+    println("Успешных тестов: $passedCount\n")
+
+    // 5. Удалите запись о баге, который был исправлен
+    println("5. Удаление исправленного бага")
+    val bugTracking = mutableMapOf("bug1" to "fixed", "bug2" to "open", "bug3" to "fixed")
+    bugTracking.remove("bug1")
+    println("Баги после удаления: $bugTracking\n")
+
+    // 6. Выведите сообщение о странице и статусе проверки
+    println("6. Статусы веб-страниц")
+    val pageStatuses = mapOf("https://example.com" to 200, "https://test.com" to 404)
+    pageStatuses.forEach { (url, status) ->
+        println("Страница $url имеет статус: $status")
+    }
+    println()
+
+    // 7. Найдите сервисы, время ответа которых превышает порог
+    println("7. Сервисы с превышением порога времени ответа")
+    val serviceResponseTimes = mapOf("service1" to 150, "service2" to 350, "service3" to 120)
+    val threshold = 200
+    val slowServices = serviceResponseTimes.filterValues { it > threshold }
+    println("Медленные сервисы (>$threshold мс): $slowServices\n")
+
+    // 8. Найдите статус ответа для endpoint или предположите, что он не был протестирован
+    println("8. Статус API endpoint")
+    val apiResults = mapOf("/users" to "200 OK", "/posts" to "404 Not Found")
+    val endpoint = "/comments"
+    val status = apiResults.getOrElse(endpoint) { "не был протестирован" }
+    println("Статус для $endpoint: $status\n")
+
+    // 9. Получите значение для "browserType" (не может быть null)
+    println("9. Получение значения конфигурации")
+    val testConfig = mapOf("browserType" to "Chrome", "timeout" to "30")
+    val browserType = testConfig.getValue("browserType")
+    println("Тип браузера: $browserType\n")
+
+    // 10. Создайте копию неизменяемого словаря, добавив новую версию
+    println("10. Добавление новой версии ПО")
+    val softwareVersions = mapOf("v1.0" to "stable", "v1.1" to "beta")
+    val updatedVersions = softwareVersions.plus("v1.2" to "alpha")
+    println("Версии ПО: $updatedVersions\n")
+
+    // 11. Получите настройки для конкретной модели или верните настройки по умолчанию
+    println("11. Настройки устройства с дефолтом")
+    val deviceSettings = mapOf("iPhone 12" to "settings1", "Samsung S21" to "settings2")
+    val model = "Pixel 6"
+    val settings = deviceSettings.getOrDefault(model, "default settings")
+    println("Настройки для $model: $settings\n")
+
+    // 12. Проверьте, содержит ли словарь определенный код ошибки
+    println("12. Проверка наличия кода ошибки")
+    val errorCodes = mapOf(404 to "Not Found", 500 to "Internal Server Error")
+    val errorCode = 404
+    val containsError = errorCodes.containsKey(errorCode)
+    println("Содержит код $errorCode: $containsError\n")
+
+    // 13. Отфильтруйте словарь по версии в ключе
+    println("13. Фильтрация сценариев по версии")
+    val testScenarios = mapOf(
+        "TestID_v2.0" to "Passed",
+        "TestID_v1.5" to "Failed",
+        "TestID_v2.0_second" to "Skipped"
     )
+    val requiredVersion = "v2.0"
+    val filteredScenarios = testScenarios.filterKeys { it.contains(requiredVersion) }
+    println("Сценарии версии $requiredVersion: $filteredScenarios\n")
 
-// 4.  Посчитайте количество успешных тестов в словаре с результатами
-    println("4. Количество успешных тестов: ${testListResult.values}")
+    // 14. Проверьте, есть ли модули с неудачным тестированием
+    println("14. Проверка наличия неудачных тестов")
+    val moduleResults = mapOf("Auth" to "passed", "Payment" to "failed", "Dashboard" to "passed")
+    val hasFailures = moduleResults.containsValue("failed")
+    println("Есть неудачные тесты: $hasFailures\n")
 
+    // 15. Добавьте настройки из другого словаря
+    println("15. Добавление настроек из другого словаря")
+    val envSettings = mutableMapOf("host" to "localhost", "port" to "8080")
+    val additionalSettings = mapOf("timeout" to "60", "retries" to "3")
+    envSettings.putAll(additionalSettings)
+    println("Настройки среды: $envSettings\n")
 
-// 5.  Удалите из изменяемого словаря с баг-трекингом запись о баге, который был исправлен
-//     (ключ - название, значение - статус исправления).
-    val bugTracking = mutableMapOf<String, String>(
-        "Bug 1" to "Rejected",
-        "Bug 2" to "In Progress",
-        "Bug 3" to "Fixed",
-        "Bug 4" to "Fixed"
+    // 16. Объедините два неизменяемых словаря
+    println("16. Объединение словарей с багами")
+    val bugs1 = mapOf("bug1" to "critical", "bug2" to "minor")
+    val bugs2 = mapOf("bug3" to "major", "bug4" to "trivial")
+    val allBugs = bugs1 + bugs2
+    println("Все баги: $allBugs\n")
+
+    // 17. Очистите изменяемый словарь
+    println("17. Очистка словаря")
+    val lastRunData = mutableMapOf("test1" to "passed", "test2" to "failed")
+    println("До очистки: $lastRunData")
+    lastRunData.clear()
+    println("После очистки: $lastRunData\n")
+
+    // 18. Исключите тесты со статусом "skipped"
+    println("18. Исключение пропущенных тестов")
+    val testReport = mapOf("test1" to "passed", "test2" to "skipped", "test3" to "failed")
+    val filteredReport = testReport.filterNot { it.value == "skipped" }
+    println("Отчет без пропущенных: $filteredReport\n")
+
+    // 19. Создайте копию словаря, удалив несколько конфигураций
+    println("19. Удаление нескольких конфигураций")
+    val configurations = mapOf("config1" to "value1", "config2" to "value2", "config3" to "value3")
+    val reducedConfigs = configurations.minus(listOf("config1", "config3"))
+    println("Конфигурации: $reducedConfigs\n")
+
+    // 20. Преобразуйте словарь в список строк
+    println("20. Преобразование в список строк отчета")
+    val testingResults = mapOf("T001" to "passed", "T002" to "failed")
+    val reportLines = testingResults.map { (id, result) -> "Test $id: $result" }
+    println("Отчет:")
+    reportLines.forEach { println("  $it") }
+    println()
+
+    // 21. Преобразуйте изменяемый словарь в неизменяемый
+    println("21. Преобразование в неизменяемый словарь")
+    val mutableResults = mutableMapOf("test1" to "passed", "test2" to "failed")
+    val immutableResults = mutableResults.toMap()
+    println("Неизменяемые результаты: $immutableResults\n")
+
+    // 22. Замените числовые ID на строковые
+    println("22. Преобразование числовых ID в строковые")
+    val testExecutionTimes = mapOf(1 to 5.5, 2 to 3.2, 3 to 7.1)
+    val stringIdTests = testExecutionTimes.mapKeys { it.key.toString() }
+    println("Тесты со строковыми ID: $stringIdTests\n")
+
+    // 23. Увеличьте каждую оценку на 10%
+    println("23. Увеличение оценок производительности на 10%")
+    val performanceScores = mapOf("v1.0" to 100.0, "v2.0" to 150.0, "v3.0" to 200.0)
+    val adjustedScores = performanceScores.mapValues { it.value * 1.1 }
+    println("Скорректированные оценки: $adjustedScores\n")
+
+    // 24. Проверьте, пуст ли словарь
+    println("24. Проверка пустоты словаря")
+    val compilationErrors = mapOf<String, String>()
+    val isEmptyDict = compilationErrors.isEmpty()
+    println("Словарь ошибок пуст: $isEmptyDict\n")
+
+    // 25. Убедитесь, что словарь не пуст
+    println("25. Проверка непустоты словаря")
+    val loadTestResults = mapOf("test1" to 95.5, "test2" to 87.3)
+    val notEmpty = loadTestResults.isNotEmpty()
+    println("Результаты нагрузочного тестирования не пусты: $notEmpty\n")
+
+    // 26. Проверьте, прошли ли все тесты успешно
+    println("26. Проверка всех тестов на успешность")
+    val automatedTests = mapOf("test1" to "passed", "test2" to "passed", "test3" to "passed")
+    val allPassed = automatedTests.all { it.value == "passed" }
+    println("Все тесты прошли: $allPassed\n")
+
+    // 27. Определите, содержит ли словарь хотя бы один тест с ошибкой
+    println("27. Проверка наличия хотя бы одной ошибки")
+    val testingOutcomes = mapOf("test1" to "passed", "test2" to "error", "test3" to "passed")
+    val hasError = testingOutcomes.any { it.value == "error" }
+    println("Есть тест с ошибкой: $hasError\n")
+
+    // 28. Отфильтруйте тесты, которые не прошли успешно и содержат "optional"
+    println("28. Комплексная фильтрация: неудачные опциональные тесты")
+    val serviceTests = mapOf(
+        "optional_auth" to "failed",
+        "required_login" to "failed",
+        "optional_cache" to "failed",
+        "optional_metrics" to "passed"
     )
-    bugTracking
-// 6.  Для словаря с результатами тестирования веб-страниц (ключ — URL страницы, значение — статус ответа),
-//     выведите сообщение о странице и статусе её проверки.
+    val filteredTests = serviceTests.filter {
+        it.value != "passed" && it.key.contains("optional")
+    }
+    println("Неудачные опциональные тесты: $filteredTests\n")
 
-// 7.  Найдите в словаре с названием и временем ответа сервисов только те, время ответа которых превышает заданный порог.
-
-// 8.  В словаре хранятся результаты тестирования API (ключ — endpoint, значение — статус ответа в виде строки).
-//     Для указанного endpoint найдите статус ответа, если endpoint отсутствует, предположите, что он не был протестирован.
-
-// 9. Из словаря, содержащего конфигурации тестового окружения
-//     (ключ — название параметра конфигурации, значение - сама конфигурация), получите значение для "browserType".
-//     Ответ не может быть null.
-
-// 10. Создайте копию неизменяемого словаря с данными о версиях тестируемого ПО, добавив новую версию.
-
-// 11. Используя словарь с настройками тестирования для различных мобильных устройств
-//     (ключ — модель устройства, значение - строка с настройками),
-//     получите настройки для конкретной модели или верните настройки по умолчанию.
-
-// 12. Проверьте, содержит ли словарь с ошибками тестирования (ключ - код ошибки, значение - описание ошибки) определенный код ошибки.
-
-// 13. Дан неизменяемый словарь, где ключи — это идентификаторы тестовых сценариев в формате "TestID_Version",
-//     а значения — статусы выполнения этих тестов ("Passed", "Failed", "Skipped").
-//     Отфильтруйте словарь, оставив только те сценарии, идентификаторы которых соответствуют определённой версии тестов,
-//     то-есть в ключе содержится требуемая версия.
-
-// 14. У вас есть словарь, где ключи — это названия функциональных модулей приложения,
-//     а значения — результаты их тестирования. Проверьте, есть ли модули с неудачным тестированием.
-
-// 15. Добавьте в изменяемый словарь с настройками тестовой среды настройки из другого словаря.
-
-// 16. Объедините два неизменяемых словаря с данными о багах.
-
-// 17. Очистите изменяемый словарь с временными данными о последнем прогоне автоматизированных тестов.
-
-// 18. Исключите из отчета по автоматизированному тестированию те случаи, где тесты были пропущены
-//     (имеют статус “skipped”). Ключи - название теста, значения - статус.
-
-// 19. Создайте копию словаря с конфигурациями тестирования удалив из него несколько конфигураций.
-
-// 20. Создайте отчет о тестировании, преобразовав словарь с результатами тестирования
-//     (ключ — идентификатор теста, значение — результат) в список строк формата "Test ID: результат".
-
-// 21. Преобразуйте изменяемый словарь с результатами последнего тестирования в неизменяемый для архивации.
-
-// 22. Преобразуйте словарь, содержащий числовой ID теста и данные о времени выполнения тестов,
-//     заменив идентификаторы тестов на их строковый аналог (например через toString()).
-
-// 23. Для словаря с оценками производительности различных версий приложения
-//     (ключи - строковая версия, значения - дробное число времени ответа сервера)
-//     увеличьте каждую оценку на 10%, чтобы учесть новые условия тестирования.
-
-// 24. Проверьте, пуст ли словарь с ошибками компиляции тестов.
-
-// 25. Убедитесь, что словарь с результатами нагрузочного тестирования не пуст.
-
-// 26. Проверьте, прошли ли успешно все автоматизированные тесты в словаре с результатами.
-
-// 27. Определите, содержит ли словарь с результатами тестирования хотя бы один тест с ошибкой.
-
-// 28. Отфильтруйте словарь с результатами тестирования сервисов, оставив только те тесты, которые не прошли успешно
-//     и содержат в названии “optional”.
-
-}
+    println("=== Все задачи выполнены ===")
