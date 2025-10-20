@@ -2,6 +2,7 @@ package org.example.kotlincourse.lessons.lesson11
 
 fun main() {
     fun003("Строка")
+    println(fun004(listOf(1, 2, 3, 4)))
 
     println(multiplyByTwo(4))
     isEven(4)
@@ -10,7 +11,7 @@ fun main() {
     println("")
     println(findFirstNegative(listOf(-5, 1, 2, 3, 4, -1)))
     println("")
-    println(processList(setOf("text", "test")))
+    println(processList(listOf("text", "test")))
 
 }
 
@@ -26,7 +27,6 @@ fun fun002(a: Int, b: Int): Int {
 
 // Принимает строку и ничего не возвращает.
 fun fun003(a: String) {
-    println(a)
 }
 
 // Принимает список целых чисел и возвращает среднее значение типа Double.
@@ -45,7 +45,7 @@ fun fun006(): Double? {
 }
 
 // Принимает nullable список целых чисел, не возвращает значения и доступна только в текущем файле.
-private fun fun007(a: Int?) {
+private fun fun007(a: List<Int>?) {
 }
 
 // Принимает целое число и возвращает nullable строку.
@@ -70,10 +70,7 @@ fun multiplyByTwo(a: Int): Int {
 
 // Создайте функцию isEven, которая принимает целое число и возвращает true, если число чётное, и false в противном случае.
 fun isEven(a: Int): Boolean {
-    if (a%2 == 0) {
-        println(true)
-    }
-    return false
+    return (a%2 == 0)
 }
 
 // Напишите функцию printNumbersUntil, которая принимает целое число n и выводит на экран числа от 1 до n.
@@ -99,7 +96,7 @@ fun findFirstNegative(a: List<Int>): Int? {
 // Напишите функцию processList, которая принимает список строк.
 // Функция должна проходить по списку и выводить каждую строку.
 // Если встречается null значение, функция должна прекратить выполнение с помощью return без возврата значения.
-fun processList(a: Set<String?>) {
+fun processList(a: List<String?>) {
     for (i in a) {
         if (i == null) return
         println(i)
