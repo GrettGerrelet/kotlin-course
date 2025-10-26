@@ -5,20 +5,23 @@ class Concert(
     var location: String,
     var cost: Double,
     var maxNumberOfPeople: Int,
-    private var ticketsSold: Int
+    private var ticketsSold: Int = 0
 )
 {
     fun informationAboutConcert () {
         println("""
             Место проведения концерта: $location
             Выступает группа: $group
+            Стоимость билетов: $cost руб.
         """.trimIndent())
     }
 
     fun buyTicket() {
-        for (i in 0..maxNumberOfPeople)
-            i+1
-        println()
+        if (ticketsSold < maxNumberOfPeople) {
+            ticketsSold++
+            println("Билет №$ticketsSold куплен")
+        } else {
+            println("Все билеты распроданы")
+        }
     }
-
 }
